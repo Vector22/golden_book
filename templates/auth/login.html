@@ -7,7 +7,7 @@
         <form class="login-form" role="form" method="POST" action="{% url 'login' %}">
             {% csrf_token %}
             <input type="hidden" name="next" value="{{ request.GET.next }}" />
-            <input type="email" name="email" id="email" placeholder="email utilisateur" />
+            <input type="email" name="email" id="email" placeholder="Email utilisateur" />
             <input type="password" name="password" id="password" placeholder="Mot de passe" />
             <button type="submit">Connecter</button>
         </form>

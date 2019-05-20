@@ -1,0 +1,104 @@
+{% extends 'base.html' %}
+
+{% block style %}
+<style>
+    nav {
+        margin-bottom: 30px;
+    }
+
+    form {
+        margin-bottom: 30px;
+    }
+
+    label {
+        color: white;
+        font-size: 1.3rem;
+    }
+
+    .fields {
+        height: 35px;
+    }
+
+    .red-star {
+        color: red;
+    }
+
+    .clearfix {
+        margin-top: 10px;
+        margin-bottom: 20px;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="container">
+    <form class="form" method="post" action="{% url 'register' %}">
+        {% csrf_token %}
+        <div class="row">
+            <div class="panel panel-default col-md-12">
+                <div class="panel-body">
+                    <div class="form-group clearfix row">
+                        <label for="{{ form.username.id_for_label }}" class="col-md-4 control-label text-right">Nom
+                            d'utilisateur<span class="red-star">*</span>:</label>
+                        <div class="col-md-6 fields">
+                            {{ form.username }}
+                        </div>
+                    </div>
+                    <div class="form-group clearfix row">
+                        <label for="{{ form.email.id_for_label }}" class="col-md-4 control-label text-right">Email<span
+                                class="red-star">*</span>:</label>
+                        <div class="col-md-6 fields">
+                            {{ form.email }}
+                        </div>
+                    </div>
+                    <div class="form-group clearfix row">
+                        <label for="{{ form.password.id_for_label }}" class="col-md-4 control-label text-right">Mot de
+                            passe<span class="red-star">*</span>:</label>
+                        <div class="col-md-6 fields">
+                            {{ form.password }}
+                        </div>
+                    </div>
+                    <div class="form-group clearfix row">
+                        <label for="{{ form.password_repeat.id_for_label }}"
+                            class="col-md-4 control-label text-right">Confirmer mot de passe<span
+                                class="red-star">*</span>:</label>
+                        <div class="col-md-6 fields">
+                            {{ form.password_repeat }}
+                        </div>
+                    </div>
+                    <div class="form-group clearfix row">
+                        <label for="{{ form.first_name.id_for_label }}"
+                            class="col-md-4 control-label text-right">Nom:</label>
+                        <div class="col-md-6 fields">
+                            {{ form.first_name }}
+                        </div>
+                    </div>
+                    <div class="form-group clearfix row">
+                        <label for="{{ form.last_name.id_for_label }}"
+                            class="col-md-4 control-label text-right">Prenom:</label>
+                        <div class="col-md-6 fields">
+                            {{ form.last_name }}
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="offset-md-4 col-md-3">
+                            <button class="btn btn-danger btn-lg btn-block" type="submit">Annuler</button>
+                        </div>
+                        <div class="col-md-3">
+                            <button class="btn btn-success btn-lg btn-block" type="submit">Enregistrer</button>
+                        </div>
+                    </div>
+
+                    {% if messages %}
+                    <ul class="messages">
+                        {% for message in messages %}
+                        <li{% if message.tags %} class="{{ message.tags }}" {% endif %}>{{ message }}</li>
+                            {% endfor %}
+                    </ul>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+{% endblock %}

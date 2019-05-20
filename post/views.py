@@ -2,12 +2,61 @@ from django.shortcuts import render, redirect
 from django.views.generic import TemplateView
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User
+from django.contrib import messages
+
+from .forms import RegisterForm
 
 
 class HomeView(TemplateView):
     template_name = "home.html"
 
-# the login an logout views
+# the login an logout and register views
+
+
+def user_register(request):
+    # if this is a POST request we need to process the form data
+    template = 'auth/register.html'
+
+    if request.method == 'POST':
+        # create a form instance and populate it with data from the request:
+        form = RegisterForm(request.POST)
+        # check whether it's valid:
+        if form.is_valid():
+            if User.objects.filter(username=form.cleaned_data['username']).exists():
+                messages.error(request, "Le nom d'utilisateur existe deja !")
+                return render(request, template, {
+                    'form': form,
+                })
+            elif User.objects.filter(email=form.cleaned_data['email']).exists():
+                messages.error(request, "L'email existe deja !")
+                return render(request, template, {
+                    'form': form,
+                })
+            elif form.cleaned_data['password'] != form.cleaned_data['password_repeat']:
+                messages.error(
+                    request, "Les deux mots de passe ne sont pas identiques !")
+                return render(request, template, {
+                    'form': form,
+                })
+            else:
+                # Create the user:
+                user = User.objects.create_user(
+                    form.cleaned_data['username'],
+                    form.cleaned_data['email'],
+                    form.cleaned_data['password']
+                )
+                user.first_name = form.cleaned_data['first_name']
+                user.last_name = form.cleaned_data['last_name']
+                user.save()
+
+                # redirect to accounts page:
+                return redirect('/unly/login/')
+
+   # No post data availabe, let's just show the page.
+    else:
+        form = RegisterForm()
+
+    return render(request, template, {'form': form})
 
 
 def user_login(request):
@@ -16,10 +65,9 @@ def user_login(request):
         password = request.POST.get('password')
         # retrieve the username according to the given email
         supposed_user = User.objects.filter(email=email)[0]
-        print(supposed_user)
         username = supposed_user.username
         user = authenticate(username=username, password=password)
-        if user and user.is_staff:
+        if user:  # and user.is_staff for admin user
             if user.is_active:
                 login(request, user)
                 # return render(request, settings.LOGIN_REDIRECT_URL, {})

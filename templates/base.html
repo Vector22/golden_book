@@ -25,6 +25,9 @@
     <!-- Custom styles for this template -->
     <link href="{% static 'css/business-casual.min.css' %}" rel="stylesheet">
 
+    {% block style %}
+    {% endblock %}
+
     {% endblock %}
 
 </head>
@@ -75,7 +78,7 @@
                         <a class="nav-link text-uppercase text-expanded" href="{% url 'login' %}">Login</a>
                     </li>
                     <li class="nav-item px-lg-4">
-                        <a class="nav-link text-uppercase text-expanded" href="#">Register</a>
+                        <a class="nav-link text-uppercase text-expanded" href="{% url 'register' %}">Register</a>
                     </li>
                     {% endif %}
                 </ul>
