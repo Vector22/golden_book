@@ -1,6 +1,6 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.views.generic import TemplateView
-
+from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User
 
 
@@ -15,7 +15,8 @@ def user_login(request):
         email = request.POST.get('email')
         password = request.POST.get('password')
         # retrieve the username according to the given email
-        supposed_user = User.objects.filter(email=email)
+        supposed_user = User.objects.filter(email=email)[0]
+        print(supposed_user)
         username = supposed_user.username
         user = authenticate(username=username, password=password)
         if user and user.is_staff:

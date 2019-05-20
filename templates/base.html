@@ -56,23 +56,28 @@
                         </a>
                     </li>
                     <li class="nav-item px-lg-4">
-                        <a class="nav-link text-uppercase text-expanded" href="{% url 'about' %}">About</a>
+                        <a class="nav-link text-uppercase text-expanded" href="#">About</a>
                     </li>
                     <li class="nav-item px-lg-4">
-                        <a class="nav-link text-uppercase text-expanded"
-                            href="{% url 'post/articles.html' %}">Articles</a>
+                        <a class="nav-link text-uppercase text-expanded" href="#">Articles</a>
                     </li>
                     <li class="nav-item px-lg-4">
-                        <a class="nav-link text-uppercase text-expanded" href="{% url 'news' %}">News</a>
+                        <a class="nav-link text-uppercase text-expanded" href="#">News</a>
                     </li>
                 </ul>
                 <ul class="navbar-nav mx-auto navbar-right">
+                    {% if user.is_authenticated %}
+                    <li class="nav-item px-lg-4">
+                        <a class="nav-link text-uppercase text-expanded" href="{% url 'logout' %}">Logout</a>
+                    </li>
+                    {% else %}
                     <li class="nav-item px-lg-4">
                         <a class="nav-link text-uppercase text-expanded" href="{% url 'login' %}">Login</a>
                     </li>
                     <li class="nav-item px-lg-4">
-                        <a class="nav-link text-uppercase text-expanded" href="{% url 'register' %}">Register</a>
+                        <a class="nav-link text-uppercase text-expanded" href="#">Register</a>
                     </li>
+                    {% endif %}
                 </ul>
             </div>
         </div>
