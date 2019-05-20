@@ -1,0 +1,27 @@
+{% load static %}
+
+<link rel="stylesheet" type="text/css" href="{% static 'css/login.css' %}">
+
+<div class="login-page">
+    <div class="form">
+        <form class="login-form" role="form" method="POST" action="{% url 'login' %}">
+            {% csrf_token %}
+            <input type="hidden" name="next" value="{{ request.GET.next }}" />
+            <input type="text" name="username" id="username" placeholder="Non utilisateur" />
+            <input type="password" name="password" id="password" placeholder="Mot de passe" />
+            <button type="submit">Connecter</button>
+        </form>
+    </div>
+    {% if messages %}
+    <ul class="messages">
+        {% for message in messages %}
+        <li{% if message.tags %} class="{{ message.tags }}" {% endif %}>{{ message }}</li>
+            {% endfor %}
+    </ul>
+    {% endif %}
+</div>
+
+
+<!-- Plugin JavaScript -->
+<script src="{% static 'vendor/jquery/jquery.min.js' %}"></script>
+<script type="text/javascript" src="{% static 'vendor/js/login.js' %}"></script>
