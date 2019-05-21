@@ -1,0 +1,82 @@
+{% extends 'base.html' %}
+
+
+{% block style %}
+<style type="text/css">
+    thead>tr {
+        background-color: rgba(224, 224, 175, 0.7);
+    }
+
+    thead>tr:hover {
+        background-color: rgba(224, 224, 175, 0.3);
+    }
+
+    tbody>tr:hover {
+        background-color: rgba(150, 200, 87, 0.6);
+    }
+
+    h1 {
+        margin-top: 80px;
+        margin-left: 10px;
+    }
+
+    .content {
+        margin-top: 50px;
+    }
+</style>
+{% endblock %}
+
+{% block h1 %}
+<h1 class="site-heading text-center text-white d-none d-lg-block">
+    <span class="site-heading-lower">Liste Utilisateurs</span>
+</h1>
+{% endblock %}
+
+{% block content %}
+<div class="container content">
+    <div class="row">
+        <div class=" col-lg-12 col-md-12 col-sm-12 table-responsive">
+            <table class="table table-bordered table-striped table condensed" border="1">
+                <thead>
+                    <tr>
+                        <th>Id</th>
+                        <th>Nom utilisateur</th>
+                        <th>Mot de passe</th>
+                        <th>Email</th>
+                        <th>Admin</th>
+                        <th>Appercu</th>
+                        <th>Editer</th>
+                        <th>Supprimer</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for user in users %}
+                    <tr>
+                        <td>{{ user.id }}</td>
+                        <td>{{ user.username }}</td>
+                        <td>{{ user.password }}</td>
+                        <td>{{ user.email }}</td>
+                        <td>
+                            {% if user.is_staff %}
+                            <span style="color: green;">Oui</span>
+                            {% else %}
+                            <span style="color: red;">Non</span>
+                            {% endif %}
+                        </td>
+                        <td><a href="{% url 'user_detail' user.id %}">appercu</a></td>
+                        <td><a href="{% url 'user_edit' user.id %}">editer</a></td>
+                        <td><a href="{% url 'user_delete' user.id %}">supprimer</a></td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-12 col-md-12 col-sm-12">
+            <a href="{% url 'user_new' %}"><button class="btn btn-primary">Nouveau</button></a>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

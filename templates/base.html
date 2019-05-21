@@ -67,6 +67,11 @@
                     <li class="nav-item px-lg-4">
                         <a class="nav-link text-uppercase text-expanded" href="#">News</a>
                     </li>
+                    {% if user.is_staff %}
+                    <li class="nav-item px-lg-4">
+                        <a class="nav-link text-uppercase text-expanded" href="{% url 'my_admin' %}">MyAdmin</a>
+                    </li>
+                    {% endif %}
                 </ul>
                 <ul class="navbar-nav mx-auto navbar-right">
                     {% if user.is_authenticated %}

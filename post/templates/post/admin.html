@@ -1,0 +1,67 @@
+{% extends 'base.html' %}
+
+{% block style %}
+<style>
+    section {
+        margin-top: 20px;
+        margin-bottom: 20px;
+    }
+
+    .nav.nav-tabs {
+        float: left;
+        display: block;
+        width: 25%;
+        margin-right: 20px;
+        border-bottom: 0;
+        border-right: 1px solid #ddd;
+        padding-right: 15px;
+    }
+</style>
+{% endblock %}
+
+{% block h1 %}
+<h1 class="site-heading text-center text-white d-none d-lg-block">
+    <span class="site-heading-lower">Administration</span>
+</h1>
+{% endblock %}
+
+{% block content %}
+
+<!-- Tabs -->
+<section id="tabs">
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-10">
+                <nav>
+                    <div class="nav nav-tabs nav-fill" id="nav-tab" role="tablist">
+                        <a class="nav-item nav-link active" id="nav-users-tab" data-toggle="tab" href="#nav-users"
+                            role="tab" aria-controls="nav-users" aria-selected="true">Users</a>
+                        <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#nav-profile"
+                            role="tab" aria-controls="nav-profile" aria-selected="false">Profiles</a>
+                        <a class="nav-item nav-link" id="nav-articles-tab" data-toggle="tab" href="#nav-articles"
+                            role="tab" aria-controls="nav-articles" aria-selected="false">Articles</a>
+                        <a class="nav-item nav-link" id="nav-extra-tab" data-toggle="tab" href="#nav-extra" role="tab"
+                            aria-controls="nav-extra" aria-selected="false">Extras</a>
+                    </div>
+                </nav>
+                <div class="tab-content py-3 px-3 px-sm-0" id="nav-tabContent">
+                    <div class="tab-pane fade show active" id="nav-users" role="tabpanel"
+                        aria-labelledby="nav-users-tab">
+                        Les utilisateurs
+                    </div>
+                    <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
+                        Profils utilisateurs
+                    </div>
+                    <div class="tab-pane fade" id="nav-articles" role="tabpanel" aria-labelledby="nav-articles-tab">
+                        Tous les articles
+                    </div>
+                    <div class="tab-pane fade" id="nav-extra" role="tabpanel" aria-labelledby="nav-extra-tab">
+                        Un coup de main ?
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

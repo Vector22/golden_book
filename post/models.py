@@ -44,10 +44,12 @@ class Post(models.Model):
     title = models.CharField(max_length=120)
     body = models.TextField()
     post_image = models.ImageField(null=True, blank=True, upload_to="images/")
+    is_allowed = models.BooleanField(default=False)
+    is_rejected = models.BooleanField(default=False)
     create_date = models.DateTimeField(auto_now_add=True)
     updateDate = models.DateTimeField(auto_now=True)
 
-    author = models.ForeignKey(Profil, on_delete=models.CASCADE)
+    author = models.ForeignKey(User, on_delete=models.CASCADE)
     category = models.ForeignKey(Category, on_delete=models.CASCADE)
 
     class Meta:

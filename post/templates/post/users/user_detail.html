@@ -1,0 +1,70 @@
+{% load static %}
+<!DOCTYPE HTML>
+
+<html lang="fr">
+	<head>
+		<meta charset="utf-8">
+	    <link href="{% static 'backend/vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+	    <title>Creative - Psycle</title>
+	    <style type="text/css">
+	      body { background-color:#DDD; }
+	      header {
+	      	text-align: center;
+	      }
+	      h1 {
+	      	padding: 5px;
+	      	background-color: #fff;
+	      	border-radius: 5px/5px;
+	      }
+	      span {
+	      	font-size: 1.8em;
+	      }
+	      [class='info'] {
+	      	font-size: 1.3em;
+	      }
+	      [class*="col"] { margin-bottom: 20px; }
+	      .well {
+	        background-color:#CCC;
+	        padding: 20px;
+	      }
+	    </style>
+	</head>
+	
+	<body>
+		<div class="container">
+			<header class="jumbotron">
+				<h1>Informations Utilisateur</h1>
+			</header>
+
+			<section class="row">
+				<div class="col-lg-12 col-md-12 col-sm-12 well">
+					<div><span>Id:</span> <span class="info">{{ user.id }}</span></div>
+					<div><span>Nom:</span> <span class="info">{{ user.username }}</span></div>
+					<div><span>Mot de passe:</span> <span class="info">{{ user.password }}</span></div>
+					<div><span>Email:</span> <span class="info">{{ user.email }}</span></div>
+					<div><span>Est administrateur:</span>
+						<span class="info">
+							{% if user.is_staff %}
+						        <span style="color: green;">Oui</span>
+						    {% else %}
+						        <span style="color: red;">Non</span>
+						    {% endif %}
+						</span>
+					</div>
+				</div>
+			</section>
+			<section class="row">
+				<a href="{% url 'user_list' %}">
+					<button class="btn btn-primary">
+						Retour
+					</button>
+				</a>
+			</section>
+		</div>
+
+		<!-- Bootstrap core JavaScript -->
+    <script src=" {% static 'backend/vendor/jquery/jquery.min.js' %}"></script>
+    <script src=" {% static 'backend/vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+
+	</body>
+</html>

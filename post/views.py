@@ -1,5 +1,7 @@
 from django.shortcuts import render, redirect
-from django.views.generic import TemplateView
+from django.urls import reverse_lazy
+from django.views.generic import TemplateView, ListView, DetailView
+from django.views.generic import UpdateView, DeleteView, CreateView
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User
 from django.contrib import messages
@@ -9,6 +11,10 @@ from .forms import RegisterForm
 
 class HomeView(TemplateView):
     template_name = "home.html"
+
+
+class MyAdminView(TemplateView):
+    template_name = "post/admin.html"
 
 # the login an logout and register views
 
@@ -49,7 +55,7 @@ def user_register(request):
                 user.last_name = form.cleaned_data['last_name']
                 user.save()
 
-                # redirect to accounts page:
+                # redirect to login page:
                 return redirect('/unly/login/')
 
    # No post data availabe, let's just show the page.
@@ -83,11 +89,41 @@ def user_login(request):
 
 
 class LogoutView(TemplateView):
-
     template_name = 'auth/login.html'  # wish to change it with home.html
 
     def get(self, request, **kwargs):
-
         logout(request)
-
         return render(request, self.template_name)
+
+
+class UserList(ListView):
+    model = User
+    template_name = 'post/user/user_list.html'
+    context_object_name = 'users'
+
+
+class UserDetail(DetailView):
+    model = User
+    template_name = 'post/users/user_detail.html'
+    context_object_name = 'user'
+
+
+class UserCreate(CreateView):
+    model = User
+    template_name = 'post/user/user_new_edit.html'
+    fields = ['username', 'email', 'password', 'is_staff']
+    success_url = reverse_lazy('user_list')
+
+
+class UserUpdate(UpdateView):
+    model = User
+    template_name = 'post/user/user_new_edit.html'
+    fields = ['username', 'email', 'password', 'is_staff']
+    success_url = reverse_lazy('user_list')
+
+
+class UserDelete(DeleteView):
+    model = User
+    template_name = 'post/user/user_delete.html'
+    success_url = reverse_lazy('user_list')
+    context_object_name = 'user'
