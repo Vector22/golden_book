@@ -1,0 +1,11 @@
+thead>tr {
+    background-color: rgba(224, 224, 175, 0.7);
+}
+
+thead>tr:hover {
+    background-color: rgba(224, 224, 175, 0.3);
+}
+
+tbody>tr:hover {
+    background-color: rgba(150, 200, 87, 0.6);
+}

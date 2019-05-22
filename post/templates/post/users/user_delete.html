@@ -1,58 +1,41 @@
+{% extends 'base.html' %}
 
 {% load static %}
-<!DOCTYPE HTML>
 
-<html>
-	<head>
-		<meta charset="utf-8">
-	    <link href="{% static 'backend/vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
-	    <style type="text/css">
-	      body { background-color:#DDD; }
-	      header {
-	      	text-align: center;
-	      }
-	      h1 {
-	      	padding: 5px;
-	      	background-color: #fff;
-	      	border-radius: 5px/5px;
-	      }
-	      .container {
-	      	margin-top: 15%;
-	      }
-	      [class*="col"] { margin-bottom: 20px; }
-	      .well {
-	        background-color:#CCC;
-	        padding: 20px;
-	      }
-	    </style>
-	</head>
-	
-	<body>
-		<div class="container well">
-			<header class="row">
-				<div class="row col-lg-12 col-sm-12">
-					<div class="col-lg-12 col-md-12 col-sm-12">
-						<h1>Etes vous sure de vouloir supprimer  "{{ user }}" ?</h1>
-					</div>
-				</div>
-				<div class="row col-lg-12 col-sm-12">
-					<form method="post" class="col-sm-6">
-						{% csrf_token %}
-	    				<!--<input type="submit" value="Submit" /> -->
-	    				<button type="submit" class="btn btn-block btn-danger btn-lg">Confirmer</button>
-					</form>
-					<div class="col-sm-6">
-						<a href="{% url 'user_list' %}">
-							<button type="button" class="btn btn-block btn-primary btn-lg">Annuler</button>
-						</a>
-					</div>
-				</div>
-			</header>
+{% block style %}
+<link href="{% static 'post/css/users/user_delete.css' %}" rel="stylesheet">
+{% endblock %}
+
+{% block h1 %}
+<h1 class="site-heading text-center text-white d-none d-lg-block">
+	<span class="site-heading-lower">
+		Suppression d'utilisateur
+	</span>
+</h1>
+{% endblock %}
+
+{% block content %}
+<div class="container well">
+	<header class="row">
+		<div class="row col-lg-12 col-sm-12">
+			<div class="col-lg-12 col-md-12 col-sm-12">
+				<h2 class="text-center text-white d-none d-lg-block">
+					Etes vous sure de vouloir supprimer "{{ user.username }}" ?
+				</h2>
+			</div>
 		</div>
-
-		<!-- Bootstrap core JavaScript -->
-    <script src=" {% static 'backend/vendor/jquery/jquery.min.js' %}"></script>
-    <script src=" {% static 'backend/vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
-
-	</body>
-</html>
+		<div class="row col-lg-12 col-sm-12">
+			<form method="post" class="col-sm-6">
+				{% csrf_token %}
+				<!--<input type="submit" value="Submit" /> -->
+				<button type="submit" class="btn btn-block btn-danger btn-lg">Confirmer</button>
+			</form>
+			<div class="col-sm-6">
+				<a href="{% url 'my_admin' %}">
+					<button type="button" class="btn btn-block btn-primary btn-lg">Annuler</button>
+				</a>
+			</div>
+		</div>
+	</header>
+</div>
+{% endblock %}

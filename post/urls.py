@@ -1,12 +1,20 @@
 from django.urls import path
 from django.contrib.auth.decorators import login_required
 
-from .views import HomeView, MyAdminView, user_login, LogoutView, user_register
+from . import views
 
 urlpatterns = [
-    path('', login_required(HomeView.as_view()), name='home'),
-    path('login/', user_login, name='login'),
-    path('logout/', LogoutView.as_view(), name='logout'),
-    path('register/', user_register, name="register"),
-    path('my-admin/', login_required(MyAdminView.as_view()), name='my_admin'),
+    path('', login_required(views.HomeView.as_view()), name='home'),
+    path('login/', views.user_login, name='login'),
+    path('logout/', views.LogoutView.as_view(), name='logout'),
+    path('register/', views.user_register, name="register"),
+    path('my-admin/', login_required(views.my_admin), name='my_admin'),
+    path('user/<int:pk>/', login_required(views.UserDetail.as_view()),
+         name='user_detail'),
+    path('user/new/', login_required(views.UserCreate.as_view()),
+         name='user_new'),
+    path('user/edit/<int:pk>', login_required(views.UserUpdate.as_view()),
+         name='user_edit'),
+    path('user/delete/<int:pk>', login_required(views.UserDelete.as_view()),
+         name='user_delete'),
 ]

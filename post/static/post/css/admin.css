@@ -1,0 +1,18 @@
+body {
+    background: rgb(158, 140, 57)
+}
+
+section {
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.nav.nav-tabs {
+    float: left;
+    display: block;
+    width: 25%;
+    margin-right: 20px;
+    border-bottom: 0;
+    border-right: 1px solid #ddd;
+    padding-right: 15px;
+}

@@ -13,8 +13,10 @@ class HomeView(TemplateView):
     template_name = "home.html"
 
 
-class MyAdminView(TemplateView):
+def my_admin(request):
     template_name = "post/admin.html"
+    users = User.objects.all()
+    return render(request, template_name, {'users': users, })
 
 # the login an logout and register views
 
@@ -110,20 +112,20 @@ class UserDetail(DetailView):
 
 class UserCreate(CreateView):
     model = User
-    template_name = 'post/user/user_new_edit.html'
+    template_name = 'post/users/user_new_edit.html'
     fields = ['username', 'email', 'password', 'is_staff']
-    success_url = reverse_lazy('user_list')
+    success_url = reverse_lazy('my_admin')
 
 
 class UserUpdate(UpdateView):
     model = User
-    template_name = 'post/user/user_new_edit.html'
+    template_name = 'post/users/user_new_edit.html'
     fields = ['username', 'email', 'password', 'is_staff']
-    success_url = reverse_lazy('user_list')
+    success_url = reverse_lazy('my_admin')
 
 
 class UserDelete(DeleteView):
     model = User
-    template_name = 'post/user/user_delete.html'
-    success_url = reverse_lazy('user_list')
+    template_name = 'post/users/user_delete.html'
+    success_url = reverse_lazy('my_admin')
     context_object_name = 'user'
