@@ -1,0 +1,57 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block style %}
+<link href="{% static 'post/css/profile/profile_detail.css' %}" rel="stylesheet">
+{% endblock %}
+
+{% block h1 %}
+<h1 class="site-heading text-center text-white d-none d-lg-block">
+    <span class="site-heading-lower">User profile</span>
+</h1>
+{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="row">
+        <div class="col-xs-12 col-sm-6 col-md-6">
+            <div class="well well-sm">
+                <div class="row">
+                    <div class="col-sm-6 col-md-4">
+                        <img src="{{ profile.avatar.url }}" alt="avatar" class="img-rounded img-responsive" />
+                    </div>
+                    <div class="col-sm-6 col-md-8">
+                        <h4>
+                            {{ profile.user.username }}
+                        </h4>
+                        <small>
+                            <cite title="{{ profile.address_city }}">
+                                {{ profile.address_city }}, {{ profile.address_country }}
+                                <span class="glyphicon glyphicon-map-marker"></span>
+                            </cite>
+                        </small>
+                        <p>
+                            <span class="glyphicon glyphicon-envelope"></span>{{ profile.user.email }}
+                            <br />
+                            {% if profile.user.web_site %}
+                            <span class="glyphicon glyphicon-globe"></span>
+                            <a href="{{ profile.user.web_site }}">{{ profile.user.web_site }}</a>
+                            {% endif %}
+                            <br />
+                            {% if profile.user.birth_date %}
+                            <span class="glyphicon glyphicon-gift"></span>June 02, 1988
+                            {% endif %}
+                        </p>
+                        <div class="btn-group">
+                            <a href="{% url 'my_admin' %}">
+                                <button class="btn btn-primary" type="button">Back</button>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -9,20 +9,21 @@ class Profil(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     description = models.TextField(null=True, blank=True)
     web_site = models.URLField(null=True, blank=True)
-    avatar = models.ImageField(null=True, blank=True, upload_to="avatars/")
+    avatar = models.ImageField(null=True, upload_to="avatars/")
     signature = models.TextField(null=True, blank=True)
     suscribe_news = models.BooleanField(default=False)
+    birth_date = models.DateField(verbose_name="Date of birth", null=True, blank=True)
     address_country = models.CharField(max_length=50, null=True, blank=True)
     address_city = models.CharField(max_length=50, null=True, blank=True)
     address_road = models.CharField(max_length=50, null=True, blank=True)
     address_zip_code = models.CharField(max_length=50, null=True, blank=True)
 
     class Meta:
-        verbose_name = 'Profil'
-        verbose_name_plural = 'Profils'
+        verbose_name = 'Profile'
+        verbose_name_plural = 'Profiles'
 
     def __str__(self):
-        return f"Profil of {self.user.username}"
+        return f"Profile of {self.user.username}"
 
 
 class Category(models.Model):

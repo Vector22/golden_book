@@ -132,6 +132,11 @@ STATICFILES_DIRS = (
     os.path.join(BASE_DIR, "static"),
 )
 
+# Media like users profile, and eventualy articles pictures
+
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
+MEDIA_URL = '/media/'
+
 # Authentification
 
 LOGIN_REDIRECT_URL = 'home'

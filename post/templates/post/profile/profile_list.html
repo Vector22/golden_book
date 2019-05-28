@@ -1,0 +1,43 @@
+<div class="row">
+    <div class=" col-lg-12 col-md-12 col-sm-12 table-responsive">
+        <table class="table table-bordered table-striped table condensed" border="1">
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Associated user</th>
+                    <th>Localization</th>
+                    <th>Suscribe news</th>
+                    <th>View</th>
+                    <th>Edit</th>
+                    <th>Delete</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for profile in profiles %}
+                <tr>
+                    <td>{{ profile.id }}</td>
+                    <td><a href="{% url 'user_detail' profile.user.id %}">{{ profile.user.username }}</a></td>
+                    <td>{{ profile.address_country }}--{{ profile.address_city }}</td>
+                    <td>
+                        {% if profile.suscribe_news %}
+                        <span style="color: green;">Yes</span>
+                        {% else %}
+                        <span style="color: red;">No</span>
+                        {% endif %}
+                    </td>
+                    <td><a href="{% url 'profile_detail' profile.id %}">view</a></td>
+                    <td><a href="#">edit</a></td>
+                    <td><a href="#">delete</a></td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+<div class="row">
+    <div class="offset-md-6 col-md-3">
+        <a href="{% url 'profile_new' %}">
+            <button class="btn btn-primary btn-lg btn-block">New</button>
+        </a>
+    </div>
+</div>

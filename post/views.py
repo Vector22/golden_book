@@ -6,7 +6,8 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User
 from django.contrib import messages
 
-from .forms import RegisterForm
+from .forms import RegisterForm  # , ProfileForm
+from .models import Profil
 
 
 class HomeView(TemplateView):
@@ -16,7 +17,9 @@ class HomeView(TemplateView):
 def my_admin(request):
     template_name = "post/admin.html"
     users = User.objects.all()
-    return render(request, template_name, {'users': users, })
+    profiles = Profil.objects.all()
+    return render(request, template_name,
+                  {'users': users, 'profiles': profiles, })
 
 # the login an logout and register views
 
@@ -129,3 +132,16 @@ class UserDelete(DeleteView):
     template_name = 'post/users/user_delete.html'
     success_url = reverse_lazy('my_admin')
     context_object_name = 'user'
+
+
+class ProfileDetail(DetailView):
+    model = Profil
+    template_name = 'post/profile/profile_detail.html'
+    context_object_name = 'profile'
+
+
+class ProfileCreate(CreateView):
+    model = Profil
+    template_name = 'post/profile/profile_new_edit.html'
+    fields = '__all__'
+    success_url = reverse_lazy('my_admin')
